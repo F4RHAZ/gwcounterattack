@@ -53,3 +53,11 @@ button:hover {
   margin-top: 20px;
   text-align: center;
 }
+@media screen and (max-width: 768px) {
+  .card {
+    width: 90%;
+  }
+  .time {
+    width: 70px;
+  }
+}

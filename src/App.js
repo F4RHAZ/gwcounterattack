@@ -73,15 +73,15 @@ const App = () => {
         </div>
         <div className="label-container">
           <label>Travel Time:</label>
-          <input type="number" value={travelTimeHours} onChange={(e) => setTravelTimeHours(e.target.value)} /> hours
-          <input type="number" value={travelTimeMinutes} onChange={(e) => setTravelTimeMinutes(e.target.value)} /> minutes
-          <input type="number" value={travelTimeSeconds} onChange={(e) => setTravelTimeSeconds(e.target.value)} /> seconds
+          <input type="number" className='time' value={travelTimeHours} onChange={(e) => setTravelTimeHours(e.target.value)} /> hours
+          <input type="number" className='time' value={travelTimeMinutes} onChange={(e) => setTravelTimeMinutes(e.target.value)} /> minutes
+          <input type="number" className='time' value={travelTimeSeconds} onChange={(e) => setTravelTimeSeconds(e.target.value)} /> seconds
         </div>
         <div className="label-container">
           <label>Hyperspace Time:</label>
-          <input type="number" value={hyperspaceTimeHours} onChange={(e) => setHyperspaceTimeHours(e.target.value)} /> hours
-          <input type="number" value={hyperspaceTimeMinutes} onChange={(e) => setHyperspaceTimeMinutes(e.target.value)} /> minutes
-          <input type="number" value={hyperspaceTimeSeconds} onChange={(e) => setHyperspaceTimeSeconds(e.target.value)} /> seconds
+          <input type="number" className='time' value={hyperspaceTimeHours} onChange={(e) => setHyperspaceTimeHours(e.target.value)} /> hours
+          <input type="number" className='time' value={hyperspaceTimeMinutes} onChange={(e) => setHyperspaceTimeMinutes(e.target.value)} /> minutes
+          <input type="number" className='time' value={hyperspaceTimeSeconds} onChange={(e) => setHyperspaceTimeSeconds(e.target.value)} /> seconds
         </div>
         <div className="label-container">
           <label>Impulse Engine boost (%):</label>
