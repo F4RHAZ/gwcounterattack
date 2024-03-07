@@ -3,17 +3,30 @@ import './App.css';
 
 const App = () => {
   const [distance, setDistance] = useState('');
-  const [maxSpeed, setMaxSpeed] = useState('');
-  const [travelTimeHours, setTravelTimeHours] = useState('');
+  const [selectedTroop, setSelectedTroop] = useState('Interceptor');
+  const [travelTimeHours, setTravelTimeHours] = useState('0');
   const [travelTimeMinutes, setTravelTimeMinutes] = useState('');
   const [travelTimeSeconds, setTravelTimeSeconds] = useState('');
-  const [hyperspaceTimeHours, setHyperspaceTimeHours] = useState('');
-  const [hyperspaceTimeMinutes, setHyperspaceTimeMinutes] = useState('');
-  const [hyperspaceTimeSeconds, setHyperspaceTimeSeconds] = useState('');
-  const [impulseBoost, setImpulseBoost] = useState('');
+  const [hyperspaceTimeHours, setHyperspaceTimeHours] = useState('0');
+  const [hyperspaceTimeMinutes, setHyperspaceTimeMinutes] = useState('0');
+  const [hyperspaceTimeSeconds, setHyperspaceTimeSeconds] = useState('0');
+  const [impulseBoost, setImpulseBoost] = useState('80');
   const [timeTaken, setTimeTaken] = useState('');
   const [currentTime, setCurrentTime] = useState('');
   const [arrivalTime, setArrivalTime] = useState('');
+
+  const troopSpeeds = {
+    'Interceptor': 12000,
+    'Destroyer': 8000,
+    'Cruiser': 7000,
+    'Battleship': 8000,
+    'Bomber' : 5000,
+    'Colony' : 4000
+  };
+
+  const handleTroopChange = (e) => {
+    setSelectedTroop(e.target.value);
+  };
 
   const calculateTimeTaken = () => {
     // Convert travel time inputs to seconds
@@ -22,8 +35,11 @@ const App = () => {
     // Convert hyperspace time inputs to seconds
     const hyperspaceTimeInSeconds = (parseInt(hyperspaceTimeHours) * 3600) + (parseInt(hyperspaceTimeMinutes) * 60) + parseInt(hyperspaceTimeSeconds);
 
+    // Get selected troop's speed
+    const troopSpeed = troopSpeeds[selectedTroop];
+
     // Calculate regular travel time
-    const regularTravelTime = (parseInt(distance) / parseInt(maxSpeed)) * 3600; // Convert hours to seconds
+    const regularTravelTime = (parseInt(distance) / troopSpeed) * 3600; // Convert hours to seconds
 
     // Calculate reduction due to Impulse Engine boost for travel time
     const travelTimeReduction = travelTimeInSeconds * (parseInt(impulseBoost) / 100);
@@ -50,14 +66,14 @@ const App = () => {
     // Calculate arrival time
     const arrival = new Date(now.getTime() + totalTimeTaken * 1000);
     setArrivalTime(arrival.toLocaleTimeString());
-  }
+  };
 
   const formatTime = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const remainingSeconds = Math.round(seconds % 60); 
     return `${hours}h ${minutes}m ${remainingSeconds}s`;
-  }
+  };
 
   return (
     <div className="card">
@@ -68,8 +84,15 @@ const App = () => {
           <input type="number" value={distance} onChange={(e) => setDistance(e.target.value)} />
         </div>
         <div className="label-container">
-          <label>Max Speed (km/h):</label>
-          <input type="number" value={maxSpeed} onChange={(e) => setMaxSpeed(e.target.value)} />
+          <label>Troop:</label>
+          <select value={selectedTroop} onChange={handleTroopChange}>
+            <option value="Interceptor">Interceptor</option>
+            <option value="Destroyer">Destroyer</option>
+            <option value="Cruiser">Cruiser</option>
+            <option value="Bomber">Bomber</option>
+            <option value="Battleship">Battleship</option>
+            <option value="Colony">Colony</option>
+          </select>
         </div>
         <div className="label-container">
           <label>Travel Time:</label>
