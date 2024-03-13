@@ -7,9 +7,6 @@ const Shipcalc = () => {
     Cruiser: 0,
     Bomber: 0,
     Battleship: 0,
-    Surveyor: 0,
-    HeavyTransport: 0,
-    LightTransport: 0,
     // Add more troop types as needed
   });
 
@@ -20,7 +17,7 @@ const Shipcalc = () => {
       defenseHP: 20,
       speed: 12000,
       cargo: 60,
-      construction: "M:240 c:240 G:240",
+      construction: "M:240 C:240 G:240",
     },
     {
       name: "Destroyer",
@@ -54,30 +51,7 @@ const Shipcalc = () => {
       cargo: 920,
       construction: "M:7300 C:5700 G:9940",
     },
-    {
-      name: "LightTransport",
-      attackHP: 1,
-      defenseHP: 5,
-      speed: 16000,
-      cargo: 900,
-      construction: "M:1600 C:1260 G:2400",
-    },
-    {
-      name: "HeavyTransport",
-      attackHP: 2,
-      defenseHP: 10,
-      speed: 20000,
-      cargo: 3250,
-      construction: "M:4400 C:3270 G:7640",
-    },
-    {
-      name: "Surveyor",
-      attackHP: 0,
-      defenseHP: 0,
-      speed: 22000,
-      cargo: 1,
-      construction: "M:2000 C:14500 G:12500",
-    },
+    // Add more troops as needed
   ];
 
   const handleTroopQuantityChange = (troop, quantity) => {
@@ -91,10 +65,6 @@ const Shipcalc = () => {
       Cruiser: 0,
       Bomber: 0,
       Battleship: 0,
-      Surveyor: 0,
-      HeavyTransport: 0,
-      LightTransport: 0,
-
       // Add more troop types as needed
     });
   };
@@ -123,40 +93,42 @@ const Shipcalc = () => {
   return (
     <div className="troop-info">
       <h3>Troop Information</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Attack HP</th>
-            <th>Defense HP</th>
-            <th>Speed (km/h)</th>
-            <th>Cargo (tons)</th>
-            <th>Construction</th>
-            <th>Quantity</th>
-          </tr>
-        </thead>
-        <tbody>
-          {troops.map((troop, index) => (
-            <tr key={index}>
-              <td>{troop.name}</td>
-              <td>{troop.attackHP}</td>
-              <td>{troop.defenseHP}</td>
-              <td>{troop.speed}</td>
-              <td>{troop.cargo}</td>
-              <td>{troop.construction}</td>
-              <td>
-                <input
-                  type="number"
-                  value={troopQuantities[troop.name]}
-                  onChange={(e) => handleTroopQuantityChange(troop.name, e.target.value)}
-                />
-              </td>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Attack HP</th>
+              <th>Defense HP</th>
+              <th>Speed (km/h)</th>
+              <th>Cargo (tons)</th>
+              <th>Construction</th>
+              <th>Quantity</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {troops.map((troop, index) => (
+              <tr key={index}>
+                <td>{troop.name}</td>
+                <td>{troop.attackHP}</td>
+                <td>{troop.defenseHP}</td>
+                <td>{troop.speed}</td>
+                <td>{troop.cargo}</td>
+                <td>{troop.construction}</td>
+                <td>
+                  <input
+                    type="number"
+                    value={troopQuantities[troop.name]}
+                    onChange={(e) => handleTroopQuantityChange(troop.name, e.target.value)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <div>
-        <h4>Total Resources and HP</h4>
+      <h4>Total Resources and HP</h4>
         <p>Total Metal: {totalMetal}</p>
         <p>Total Crystal: {totalCrystal}</p>
         <p>Total Gas: {totalGas}</p>
